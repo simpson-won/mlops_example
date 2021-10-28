@@ -4,10 +4,10 @@
 #
 
 import pandas as pd
-from app.lib.get_data import file_get
+from app.lib.http_util import file_get
 from app.lib.panda_util import split_data
 
-class DataIOSteam:
+class FileService:
 
     def __init__(self):
         self.train_file_name = 'skl_train.csv'
@@ -55,9 +55,3 @@ class DataIOSteam:
         return file_get(self.test_file_name)
         
     
-    def _get_X_y(self, data):
-        X = data[data.columns[1:]]
-        X = X[['Sex', 'Age_band', 'Pclass']]
-        y = data['Survived']
-
-        return X, y

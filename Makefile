@@ -15,3 +15,6 @@ run-api:
 
 run-train:
 	RUN="dev" PYTHONPATH=${PWD} python app/train/main.py
+
+run-preprocess:
+	RUN="dev" PYTHONPATH=${PWD} python app/preprocessing/preprocess.py

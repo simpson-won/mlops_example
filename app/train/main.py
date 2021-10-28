@@ -27,9 +27,11 @@ def main(n_estimator:int ,
          server_port: int,
          d_server_addr: str,
          d_server_port: int,
-         d_server_token: str):
-    #mlflow.set_experiment(experiment_name)
-    #mlflow.set_tracking_uri(f'http://{server_addr}:{server_port}')
+         d_server_token: str,
+         is_local_only = True):
+    if is_local_only == False:
+        mlflow.set_experiment(experiment_name)
+        mlflow.set_tracking_uri(f'http://{server_addr}:{server_port}')
 
     trainSkl = TrainSkl()
 
@@ -42,15 +44,16 @@ def main(n_estimator:int ,
         #log_metric("lgbm_score", score_info['lgbm_model_score'])
     '''
     # metrics를 한 번에 등록 -> json 형태가 되어야 함
-    #log_metrics(model_info['score'])
-    #log_params(model_info['params'])
+    if is_local_only == False:
+        log_metrics(model_info['score'])
+        log_params(model_info['params'])
 
-    #ml_sklearn.log_model(sk_model=model,
-    #                     artifact_path="sklearn-model",
-    #                     registered_model_name='ml_model')
+        ml_sklearn.log_model(sk_model=model,
+                             artifact_path="sklearn-model",
+                             registered_model_name='ml_model')
 
-    #print("Model saved in run %s" % mlflow.active_run().info.run_uuid)
-    #mlflow.end_run()
+        print("Model saved in run %s" % mlflow.active_run().info.run_uuid)
+        mlflow.end_run()
 
 def get_arg_parser():
     argument_parser = argparse.ArgumentParser()
