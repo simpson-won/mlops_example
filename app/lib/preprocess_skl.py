@@ -33,10 +33,15 @@ class PreprocessSkl:
         return data
 
     def _set_feature(self, data):
-        data['Fare'] = data["Fare"].map(lambda i: np.log(i) if i > 0 else 0)
+        print('_set_feature =\n', data)
+        print('Fare =\n', data['Fare'])
+        data['Fare'] = data["Fare"].map(lambda i: np.log(i) if (type(i) is int and i > 0) else 0)
         data['Age_band'] = 0
         data['Alone'] = 0
         data['Family_Size'] = 0
+
+        print('parch=\n', data['Parch'])
+        print('SibSp=\n', data['SibSp'])
 
         data.loc[data['Age'] <= 16, 'Age_band'] = 0
         data.loc[(data['Age'] > 16) & (data['Age'] <= 32), 'Age_band'] = 1

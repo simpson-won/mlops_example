@@ -18,9 +18,13 @@ class TrainSkl(PreprocessSkl, PathConfig, ModelingSkl, DataIOSteam):
             d_server_addr: str = '127.0.0.1',
             d_server_port: int = 80,
             d_server_token: str = 'xyz'):
-        data = self._get_data(self.data_path, is_local=False)
+        is_local = True
+        data = self._get_data(self.data_path, is_local=is_local)
         data = self.run_preprocessing(data)
+        print('data =', data)
         X, y = self._get_X_y(data)
-        model, model_info = self.run_modeling(X, y, n_estimator)
-        return model, model_info
+        print('X =', type(X), X)
+        print('y =', type(y), y)
+        #model, model_info = self.run_modeling(X, y, n_estimator)
+        #return model, model_info
 

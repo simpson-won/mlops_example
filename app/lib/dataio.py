@@ -5,6 +5,7 @@
 
 import pandas as pd
 from app.lib.get_data import file_get
+from app.lib.panda_util import split_data
 
 class DataIOSteam:
 
@@ -34,10 +35,18 @@ class DataIOSteam:
 
 
     def _get_data(self, path, is_local: bool = True, is_train: bool = True):
+        print('_get_data 0', is_local, is_train)
         if is_local: 
+            print('_get_data 1')
+            filepath = f'{path}/{self.train_file_name}'
+            print('_get_data 2', filepath)
+            data = pd.read_csv(filepath)
+            df_train, df_test = split_data(data, test_ratio=0.3)
             if is_train:
-                return pd.read_csv(f'{path}/{self.train_file_name}')
-            return pd.read_csv(f'{path}/{self.test_file_name}')
+                return df_train
+            print('_get_data 3')
+            return df_test
+        print('_get_data 4')
         return self._get_train_data_from_remote(is_train)
 
     def _get_train_data_from_remote(self, is_train: bool = True):

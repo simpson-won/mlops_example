@@ -3,6 +3,9 @@ import pandas as pd
 from io import StringIO
 import os
 
+from app.lib.panda_util import split_data
+
+
 #down_url="http://192.168.0.34:8091/files/"
 #up_url = "http://192.168.0.34:8091/upload"
 down_url="http://127.0.0.1:25478/files/"
@@ -40,18 +43,6 @@ def file_get(file_name:str):
     df = pd.read_csv(StringIO(r.text))
 
     return df
-
-
-def split_data(df, test_ratio:float):
-    """
-    split data by test_ratio
-    """
-    data_size = len(df.index)
-    test_size = int(data_size*test_ratio)
-    train_size = data_size - test_size
-    df_train = df.iloc[:train_size, :]
-    df_test = df.iloc[train_size + 1:, :]
-    return df_train, df_test
 
 
 if __name__=="__main__":
