@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow-tracking-server
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: mlflow-tracking-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mlflow-tracking-server
+    spec:
+      containers:
+      - name: mlflow-tracking-server
+        image: 192.168.0.16:5000/mlflow-ser:latest
+        ports:
+        - containerPort: 5003
+      #volumes:
+      #  - name: mlflow-manifest-storage
+      #    persistentVolumeClaim:
+      #      claimName: mlflow-manifest-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlflow-tracking-server
+  namespace: default
+  labels:
+    app: mlflow-tracking-server
+spec:
+  type: NodePort
+  ports:
+  - port: 5003
+    protocol: TCP
+    targetPort: 5003
+    nodePort: 30100
+  selector:
+    app: mlflow-tracking-server
+
+---
+#kind: PersistentVolumeClaim
+#apiVersion: v1
+#metadata:
+#  name: mlflow-manifest-pvc
+#  namespace: default
+#spec:
+#  storageClassName: gp2
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 1Gi
+##
