@@ -1,5 +1,15 @@
 # mlops_example
 
+### Description
+This is an example source for a simple mlops flow implementation.
+It includes the following features:
+- Upload data
+- Data preprocessing
+- Detire modeling and testing and distribution
+- New data prediction
+
+You can do a simple test through the Makefile in the root folder.
+
 ### To Run:
 
 make run-data       : data implements
