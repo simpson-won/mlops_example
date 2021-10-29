@@ -7,9 +7,6 @@ from app import get_arg_parser, arguments
 
 from app.lib.panda_util import split_data
 
-
-#down_url="http://192.168.0.34:8091/files/"
-#up_url = "http://192.168.0.34:8091/upload"
 params={'token':'f9403fc5f537b4ab332d'}
 
 up_files = ['skl_train.csv', 'skl_test.csv']
