@@ -12,10 +12,10 @@ You can do a simple test through the Makefile in the root folder.
 
 ### To Run:
 
-make run-data       : data implements
-make run-preprocess : data process
-make run-train      : data trainning
-make run-api        : data prediction, run flask app to predict through web apps.
+- make run-data       : data implements
+- make run-preprocess : data process
+- make run-train      : data trainning
+- make run-api        : data prediction, run flask app to predict through web apps.
 
 
 ### Execution Flow :
