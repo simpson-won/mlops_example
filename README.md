@@ -20,10 +20,7 @@ You can do a simple test through the Makefile in the root folder.
 
 ### Execution Flow :
 
-1) run-data
-2) run-preprocess
-3) run-train
-4) run-api
+run-data -> run-preprocess -> run-train -> run-api
 
 
 ### pre-request
