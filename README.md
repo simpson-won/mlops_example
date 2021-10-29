@@ -18,4 +18,8 @@ make run-api        : data prediction, run flask app to predict through web apps
 
 ### pre-request
 1) install file-api-server
-
+2) install ftp server
+3) install jenkins
+4) install docker 
+5) install kubernetes
+6) install mlflow-server in kubernetes
