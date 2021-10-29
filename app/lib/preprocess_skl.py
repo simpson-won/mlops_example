@@ -4,10 +4,10 @@ class PreprocessSkl:
     def __init__(self):
         pass
 
-    def run_preprocessing(self, data):
+    def run_preprocessing(self, data, mode:str = "train"):
         data = self._set_initial(data)
         data = self._set_fill_na(data)
-        data = self._set_feature(data)
+        data = self._set_feature(data, mode=mode)
         data = self._set_replace(data)
 
         return data
@@ -32,16 +32,12 @@ class PreprocessSkl:
 
         return data
 
-    def _set_feature(self, data):
-        print('_set_feature =\n', data)
-        print('Fare =\n', data['Fare'])
-        data['Fare'] = data["Fare"].map(lambda i: np.log(i) if (type(i) is int and i > 0) else 0)
+    def _set_feature(self, data, mode:str):
+        if mode == "train":
+            data['Fare'] = data["Fare"].map(lambda i: np.log(i) if i > 0 else 0)
         data['Age_band'] = 0
         data['Alone'] = 0
         data['Family_Size'] = 0
-
-        print('parch=\n', data['Parch'])
-        print('SibSp=\n', data['SibSp'])
 
         data.loc[data['Age'] <= 16, 'Age_band'] = 0
         data.loc[(data['Age'] > 16) & (data['Age'] <= 32), 'Age_band'] = 1
@@ -49,7 +45,10 @@ class PreprocessSkl:
         data.loc[(data['Age'] > 48) & (data['Age'] <= 64), 'Age_band'] = 3
         data.loc[data['Age'] > 64, 'Age_band'] = 4
 
-        data['Family_Size'] = data['Parch'] + data['SibSp']
+        if mode == "train":
+            data['Family_Size'] = data['Parch'] + data['SibSp']
+        else:
+            data['Family_Size'] = str(data['Parch']) + str(data['SibSp'])
 
         data.loc[data.Family_Size == 0, 'Alone'] = 1
 

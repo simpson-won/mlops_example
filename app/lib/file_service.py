@@ -10,48 +10,34 @@ from app.lib.panda_util import split_data
 class FileService:
 
     def __init__(self):
-        self.train_file_name = 'skl_train.csv'
-        self.test_file_name = 'ske_test.csv'
+        pass
 
 
-    @property
-    def train_file_name(self): 
-        return self._train_file_name
-
-
-    @property
-    def test_file_name(self):
-        return self._test_file_name
-
-
-    @train_file_name.setter
-    def train_file_name(self, name: str):
-        self._train_file_name = name
-
-
-    @test_file_name.setter
-    def test_file_name(self, name: str):
-        self._test_file_name = name
-
-
-    def _get_data(self, path, is_local: bool = True, is_train: bool = True):
-        print('_get_data 0', is_local, is_train)
+    def get_data(self,
+                 path:str,
+                 testmode:str = 'train',
+                 is_local:bool = True,
+                 is_train:bool = True,
+                 addr:str = '127.0.0.1',
+                 port:int = 25478 ):
+        filename = f'skl_{testmode}.csv'
         if is_local: 
-            print('_get_data 1')
-            filepath = f'{path}/{self.train_file_name}'
-            print('_get_data 2', filepath)
+            filepath = f'{path}/{filename}'
             data = pd.read_csv(filepath)
             df_train, df_test = split_data(data, test_ratio=0.3)
             if is_train:
                 return df_train
-            print('_get_data 3')
             return df_test
-        print('_get_data 4')
-        return self._get_train_data_from_remote(is_train)
+        return self._get_train_data_from_remote(addr=addr,
+                                                port=port,
+                                                filename=filename)
 
-    def _get_train_data_from_remote(self, is_train: bool = True):
-        if is_train:
-            return file_get(self.train_file_name)
-        return file_get(self.test_file_name)
+
+    def _get_train_data_from_remote(self,
+                                    addr:str = '127.0.0.1',
+                                    port:int = 8001,
+                                    filename:str = 'skl_train.csv'):
+
+        return file_get(addr, port, filename)
         
     

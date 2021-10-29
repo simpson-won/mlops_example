@@ -4,6 +4,7 @@ set -e
 
 STORE_URL='sqlite:///model.db'
 ARTIFACT_ROOT='ftp://mlflow:mlflow@127.0.0.1/artifacts'
+#ARTIFACT_ROOT='ftp://mlflow:mlflow@192.168.0.34/artifacts'
 #ARTIFACT_ROOT='/mlflow/artifacts'
 
 echo "store_uri="$STORE_URL
