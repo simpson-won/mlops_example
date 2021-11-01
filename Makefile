@@ -21,3 +21,6 @@ run-preprocess:
 
 run-data:
 	PYTHONPATH=${PWD} python app/lib/http_util.py --data_server_addr=192.168.0.34 --data_server_port=8091 --local_test=False
+
+docker-build:
+	PYTHONPATH=${PWD} 
