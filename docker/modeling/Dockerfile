@@ -1,9 +1,9 @@
 FROM python:3.8.10
 
 RUN mkdir -p /root/mlops/app
-ADD app /root/mlops/app
-ADD data /root/mlops
-ADD requirements.txt /root/mlops
+COPY app /root/mlops
+COPY data /root/mlops
+COPY requirements.txt /root/mlops
 
 RUN pip install -r /root/mlops/requirements.txt
 
