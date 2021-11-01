@@ -3,7 +3,7 @@ FROM python:3.8.10
 RUN mkdir -p /root/mlops
 COPY * /root/mlops
 RUN ls -al /root/mlops
-COPY ../* /root/mlops
+COPY ../../app /root/mlops
 RUN ls -al /root/mlops
 
 RUN pip install -r /root/mlops/requirements.txt
