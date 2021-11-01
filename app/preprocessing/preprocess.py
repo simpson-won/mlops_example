@@ -84,7 +84,7 @@ if __name__=="__main__":
     preprocess = Preprocess()
 
     preprocess.run(
-         exp_name=arguments['experiment_name'],
+         exp_name=arguments['exp_name'],
          d_server_addr=arguments['data_server_addr'],
          d_server_port=arguments['data_server_port'],
          d_server_token=arguments['data_server_token'],
