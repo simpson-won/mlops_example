@@ -1,7 +1,7 @@
 FROM python:3.8.10
 
 RUN mkdir -p /root/mlops/app
-COPY app /root/mlops
+COPY app /root/mlops/app
 COPY data /root/mlops
 COPY requirements.txt /root/mlops
 RUN ls -al /root/mlops
