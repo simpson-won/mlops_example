@@ -4,6 +4,7 @@ RUN mkdir -p /root/mlops/app
 COPY app /root/mlops
 COPY data /root/mlops
 COPY requirements.txt /root/mlops
+RUN ls -al
 
 RUN pip install -r /root/mlops/requirements.txt
 
