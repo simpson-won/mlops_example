@@ -38,7 +38,6 @@ def main(n_estimator:int ,
     if is_local_only == False:
         log_metrics(model_info['score'])
         log_params(model_info['params'])
-        log_params(model_info['params'])
 
         log_metric('rmse', predict['rmse'])
         log_metric('r2', predict['r2'])
